@@ -1,0 +1,29 @@
+const { Schema, model } = require('mongoose');
+
+const MascotaSchema = Schema({
+    key: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    mascota: {
+        type: String,
+        required: true
+    },
+    dueño: {
+        type: String,
+        required: true
+    },
+    edad: {
+        type: Number,
+        required: true
+    }    
+});
+
+MascotaSchema.method('toJSON', function() {
+    const { __v, _id, ...object } = this.toObject();
+    object.id = _id;
+    return object;
+});
+
+module.exports = model('Mascota', MascotaSchema);
